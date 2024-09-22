@@ -1,101 +1,123 @@
-import Image from "next/image";
+"use client"
+import { useState, useEffect } from "react"
+import { Button } from "./components/ui/buttons"
+import { Card, CardContent } from "./components/ui/card"
+import { ChevronRightIcon, HeartIcon, ShieldCheckIcon, UsersIcon } from "lucide-react"
+import Link from 'next/link'
 
-export default function Home() {
+export default function Component() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
+      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
+        <h1 className="text-2xl font-bold">DPMN</h1>
+        <nav>
+          <ul className="flex space-x-4">
+            <li><a href="#" className="hover:text-purple-300 transition-colors">About</a></li>
+            <li><a href="#" className="hover:text-purple-300 transition-colors">Features</a></li>
+            <li><a href="#" className="hover:text-purple-300 transition-colors">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main className="container mx-auto px-4 py-16">
+        <section className="text-center mb-16">
+          <h2 className="text-5xl font-bold mb-6 animate-fade-in-up">
+            Revolutionizing Philanthropy with Blockchain
+          </h2>
+          <p className="text-xl mb-8 animate-fade-in-up animation-delay-200">
+            Connect donors and charities seamlessly. Ensure transparency. Maximize impact.
+          </p>
+          <Link 
+            href="/ngo-list" 
+            target="_blank" 
             rel="noopener noreferrer"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <Button 
+              size="lg" 
+              className="bg-purple-500 hover:bg-purple-600 text-white animate-fade-in-up animation-delay-400"
+            >
+              Join the Network <ChevronRightIcon className="ml-2" />
+            </Button>
+          </Link>
+        </section>
+        <section className="grid md:grid-cols-3 gap-8 mb-16">
+          {mounted && (
+            <>
+              <FeatureCard 
+                icon={<HeartIcon className="w-12 h-12 text-purple-400" />}
+                title="Efficient Matching"
+                description="Our AI-powered system connects donors with the most suitable charitable projects."
+              />
+              <FeatureCard 
+                icon={<ShieldCheckIcon className="w-12 h-12 text-purple-400" />}
+                title="Transparent Tracking"
+                description="Blockchain technology ensures every donation is traceable and its impact measurable."
+              />
+              <FeatureCard 
+                icon={<UsersIcon className="w-12 h-12 text-purple-400" />}
+                title="Community-Driven"
+                description="Join a network of like-minded individuals and organizations committed to making a difference."
+              />
+            </>
+          )}
+        </section>
+        <section className="text-center">
+          <h3 className="text-3xl font-bold mb-6">Ready to Make a Difference?</h3>
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white transition-colors"
           >
-            Read our docs
-          </a>
-        </div>
+            Explore Projects
+          </Button>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="container mx-auto px-4 py-6 text-center text-sm opacity-75">
+        © 2023 Decentralized Philanthropy Matching Network. All rights reserved.
       </footer>
     </div>
-  );
+  )
 }
+
+function FeatureCard({ icon, title, description }) {
+  return (
+    <Card className="bg-white/10 border-none">
+      <CardContent className="p-6 text-center">
+        <div className="mb-4">{icon}</div>
+        <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <p className="text-gray-300">{description}</p>
+      </CardContent>
+    </Card>
+  )
+}
+
+// Add these styles to your global CSS file
+const styles = `
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+`
